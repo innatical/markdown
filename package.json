@@ -1,19 +1,17 @@
 {
   "name": "@innatical/markdown",
+  "description": "Markdown parser for octii.chat focused on simplicty.",
   "version": "0.1.0",
-  "dependencies": {
-    "react-string-replace": "^0.4.4"
-  },
   "author": "Innatical",
   "license": "MIT",
-  "repository": {
-    "url": "https://github.com/innatical/markdown"
-  },
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "scripts": {
     "prepublish": "tsc",
     "dev": "parcel --out-dir build ./test/index.html"
+  },
+  "dependencies": {
+    "react-string-replace": "^0.4.4"
   },
   "devDependencies": {
     "@types/react": "^16.9.53",
@@ -22,5 +20,19 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "typescript": "^4.0.3"
-  }
+  },
+  "repository": {
+    "url": "git+https://github.com/innatical/markdown.git"
+  },
+  "bugs": {
+    "url": "https://github.com/innatical/markdown/issues"
+  },
+  "homepage": "https://github.com/innatical/markdown#readme",
+  "directories": {
+    "test": "test"
+  },
+  "keywords": [
+    "react",
+    "markdown"
+  ]
 }
