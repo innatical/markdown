@@ -1,17 +1,39 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React, { useMemo, ReactNodeArray } from 'react'
+import reactStringReplace from 'react-string-replace'
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+type Replacer = (match: string, index: number) => React.ReactNode
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+const pipe = <T extends any>(input: T, ...functions: ((input: T) => T)[]) =>
+  functions.reduce((prev, func) => func(prev), input)
+
+const replace = (regex: RegExp, replacement: Replacer) => (
+  text: ReactNodeArray
+) => reactStringReplace(text, regex, replacement)
+
+const useMarkdown = (
+  text: string,
+  options: {
+    bold: Replacer
+    italic: Replacer
+    underlined: Replacer
+    strikethough: Replacer
+    link: Replacer
+    codeblock: Replacer
+  }
+) => {
+  return useMemo(
+    () =>
+      pipe<ReactNodeArray>(
+        [text],
+        replace(/\*\*(.*)\*\*/gim, options.bold),
+        replace(/\*(.*)\*/gim, options.italic),
+        replace(/__(.*)__/gim, options.underlined),
+        replace(/~~(.*)~~/gim, options.strikethough),
+        replace(/^(https?:\/\/[^\s$.?#].[^\s]*)$/gim, options.link),
+        replace(/```(.*)```/gim, options.codeblock)
+      ),
+    [text, options]
+  )
+}
+
+export default useMarkdown
