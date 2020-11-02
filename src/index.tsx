@@ -29,7 +29,7 @@ const useMarkdown = (
         replace(/\*(.*)\*/gim, options.italic),
         replace(/__(.*)__/gim, options.underlined),
         replace(/~~(.*)~~/gim, options.strikethough),
-        replace(/^(https?:\/\/[^\s$.?#].[^\s]*)$/gim, options.link),
+        replace(/(https?:\/\/[^\s$.?#].[^\s]*)/gim, options.link),
         replace(/```(.*)```/gim, options.codeblock)
       ),
     [text, options]
