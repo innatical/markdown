@@ -19,6 +19,7 @@ const useMarkdown = (
     strikethough: Replacer
     link: Replacer
     codeblock: Replacer
+    custom: [RegExp, Replacer][]
   }
 ) => {
   return useMemo(
@@ -30,7 +31,8 @@ const useMarkdown = (
         replace(/__(.*)__/gim, options.underlined),
         replace(/~~(.*)~~/gim, options.strikethough),
         replace(/(https?:\/\/[^\s$.?#].[^\s]*)/gim, options.link),
-        replace(/```(.*)```/gim, options.codeblock)
+        replace(/```(.*)```/gim, options.codeblock),
+        ...options.custom.map((custom) => replace(custom[0], custom[1]))
       ),
     [text, options]
   )
