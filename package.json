@@ -1,7 +1,7 @@
 {
   "name": "@innatical/markdown",
   "description": "Markdown parser for octii.chat focused on simplicty.",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": "Innatical",
   "license": "MIT",
   "types": "dist/index.d.ts",
