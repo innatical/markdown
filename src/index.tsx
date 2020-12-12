@@ -20,8 +20,10 @@ interface ParserOptions {
   custom: [RegExp, Replacer][]
 }
 
+type Input = string | ReactNodeArray
+
 export const parseMarkdown = (
-  text: string,
+  text: Input,
   options: ParserOptions
 ) => pipe<ReactNodeArray>(
   [text],
@@ -35,7 +37,7 @@ export const parseMarkdown = (
 )
 
 const useMarkdown = (
-  text: string,
+  text: Input,
   options: ParserOptions
 ) => {
   return useMemo(
