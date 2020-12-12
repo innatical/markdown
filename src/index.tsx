@@ -25,11 +25,11 @@ type Input = string | ReactNodeArray
 export const parseMarkdown = (text: Input, options: ParserOptions) =>
   pipe<ReactNodeArray>(
     [text],
-    replace(/\*\*(.*)\*\*/gim, options.bold),
-    replace(/\*(.*)\*/gim, options.italic),
-    replace(/_(.*)_/gim, options.italic),
-    replace(/__(.*)__/gim, options.underlined),
-    replace(/~~(.*)~~/gim, options.strikethough),
+    replace(/\*\*(.*?)\*\*/gim, options.bold),
+    replace(/\*(.*?)\*/gim, options.italic),
+    replace(/_(.*?)_/gim, options.italic),
+    replace(/__(.*?)__/gim, options.underlined),
+    replace(/~~(.*?)~~/gim, options.strikethough),
     replace(/(https?:\/\/[^\s$.?#].[^\s]*)/gim, options.link),
     replace(/```((.|\n)*)```/gim, options.codeblock),
     ...options.custom.map((custom) => replace(custom[0], custom[1]))
